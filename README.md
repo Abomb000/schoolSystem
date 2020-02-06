@@ -1,7 +1,9 @@
-![]![]https://st4.depositphotos.com/12141488/20550/v/450/depositphotos_205505540-stock-illustration-scratched-textured-example-stamp-seal.jpg
+![example](https://st4.depositphotos.com/12141488/20550/v/450/depositphotos_205505540-stock-illustration-scratched-textured-example-stamp-seal.jpg)
 
-#demo project (Python,docker,redis,mongodb)
-##The project based on requirements:
+# demo project (Python,docker,redis,mongodb)
+
+## The project based on requirements:
+
 * Design and implement a school system for managing students, course & grades.
     - API systems to create and modify Students, Courses and Grades.
         - RESTful over HTTP (CRUD)
@@ -11,7 +13,7 @@
         - Implemented cache mechanism (based on redis)
 
     
-#####Data Models in project:
+##### Data Models in project:
 Student
 
     Id              -> String Object (Autoinc ID)
@@ -32,7 +34,7 @@ Grade
     Course          -> String (ID from courses collection)
 
 
-##Project installation:
+## Project installation:
 basically installation requires docker & docker compose installed on machine:
 the installation will setup/install 4-dockers
 * redis
@@ -44,13 +46,13 @@ for installation run:
 ```shell script
 $ docker-compose up --build
 ``` 
-##Project endpoints:
+## Project endpoints:
 Management url / GUI editor:
 
     http://localhost/manager
     
 ### RESTful API:
-####List collection records
+#### List collection records
 Each collection (students | courses | grades) can be retrieved by request
 
      GET   http://localhost/api/[students|courses|grades]
@@ -73,7 +75,7 @@ xhr.onload = function() {
 };
 xhr.send();
 ```
-####Create a new record
+#### Create a new record
 POST - create a new record in collection
 (student / course / grade)
 Each collection record can be created by request
@@ -102,7 +104,7 @@ xhr.send(JSON.stringify({ "email": "abuse@gmail.com", "firstName": "John","lastN
 
 ```
 
-####Update a record
+#### Update a record
 PUT - update record in collection
 (student / course / grade)
 
@@ -133,7 +135,7 @@ xhr.send(JSON.stringify({ "email": "abuse@gmail.com", "firstName": "John","lastN
 ```
 
 
-####Delete a record
+#### Delete a record
 DELETE - method used to delete record from collection
 (student / course / grade)
 
