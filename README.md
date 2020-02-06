@@ -1,4 +1,4 @@
-![]https://st4.depositphotos.com/12141488/20550/v/450/depositphotos_205505540-stock-illustration-scratched-textured-example-stamp-seal.jpg
+![example](https://st4.depositphotos.com/12141488/20550/v/450/depositphotos_205505540-stock-illustration-scratched-textured-example-stamp-seal.jpg)
 
 #demo project (Python,docker,redis,mongodb)
 ##The project based on requirements:
