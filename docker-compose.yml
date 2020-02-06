@@ -1,0 +1,41 @@
+version: "3"
+#TODO: env implementation
+services:
+  redis:
+    image: redis
+    command: redis-server --requirepass example
+    container_name: redis
+    restart: always
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: always
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/var/log/mongodb
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=example
+    volumes:
+      - "./mongodb/dbnew1:/data/db"
+      - "~/container_logs/mongo/log:/var/log/mongodb"
+      - "~/container_volumes1/mongo/data/configdb:/data/configdb"
+    ports:
+      - "27017-27019:27017-27019"
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - "~/container_logs/nginx/log:/var/log/nginx"
+
+  flask:
+    build: ./flask
+    container_name: flask
+    restart: always
+    ports:
+      - "3030:3030"
+    volumes:
+      - "~/container_logs/flask/log:/var/log/uwsgi"
