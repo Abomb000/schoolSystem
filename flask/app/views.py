@@ -55,7 +55,7 @@ def students(doctype):
         ).save()
     else:
         return render_template('404.html', title='404'), 404
-    return Response(jsonify({'status': 'ok', 'message': "created"}), mimetype="application/json", status=201)
+    return jsonify({'status': 'ok', 'message': "created"}), 201
 
 
 @app.route("/api/<doctype>/<id>", methods=["PUT"])
@@ -75,7 +75,8 @@ def putStudents(doctype, id):
         )
     else:
         return render_template('404.html', title='404'), 404
-    return Response(jsonify({'message': "ok"}), mimetype="application/json", status=200)
+    return jsonify({'message': "ok"})
+    #return Response(jsonify({'message': "ok"}), mimetype="application/json", status=200)
 
 
 @app.route("/api/<doctype>", methods=["GET"])
@@ -88,8 +89,7 @@ def readapi(doctype):
         dataset = Course.objects()
     else:
         return render_template('404.html', title='404'), 404
-    return Response(json.dumps({"aaData": MongoEngineJSONEncoder(dataset)}), mimetype="application/json",
-                    status=200)
+    return json.dumps({"aaData": MongoEngineJSONEncoder(dataset)}), 200
 
 
 @app.route("/api/<doctype>/<id>", methods=["GET"])

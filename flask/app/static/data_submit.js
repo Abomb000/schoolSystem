@@ -36,7 +36,13 @@ function dialogSubmitter(rq_type,tbl) {
 							console.log('saved');
 							tbl.ajax.reload();
 							$dialog.dialog('destroy').remove();
-						}
+						},
+						fail: function(xhr, textStatus, errorThrown){
+						    console.log(xhr);
+						    console.log(textStatus);
+						    console.log(errorThrown);
+                           			    alert('request failed');
+			                        }
 					});
                 }
             });
