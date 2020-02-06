@@ -104,7 +104,7 @@ xhr.send(JSON.stringify({ "email": "abuse@gmail.com", "firstName": "John","lastN
 
 ```
 
-####Update a record
+#### Update a record
 PUT - update record in collection
 (student / course / grade)
 
