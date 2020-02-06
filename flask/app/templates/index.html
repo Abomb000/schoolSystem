@@ -1,0 +1,10 @@
+<!doctype html>
+<title>Statistic</title>
+loaded: {{ loaded }}<br/>
+{% if top_student %}
+Top student: {{ top_student._id.student }}<br />
+Top course: {{ top_student._id.course }}<br />
+AVG grade: {{ top_student.avggrade }}<br />
+{% else %}
+  <h1>sorry no students on top!</h1>
+{% endif %}

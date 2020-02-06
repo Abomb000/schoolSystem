@@ -1,0 +1,41 @@
+
+<form action="" id="popupForm" method="post">
+{% if data %}
+<input data-val="true" data-val-regex="ID is not valid" data-val-regex-pattern="^([a-zA-Z0-9]+)$" id="id" name="id" type="hidden" value="{{ id|e }}" />
+{% endif %}
+	<div class="form-group">
+        <label>Name</label>
+        <input class="form-control" data-val="true" data-val-required="Name required" id="name" name="name" type="text" value="{{ data.name|e }}" />
+        <span class="field-validation-valid" data-valmsg-for="name" data-valmsg-replace="true"></span>
+    </div>
+    <!--
+    <div class="form-group">
+        <label>Students</label>
+        <input class="form-control" data-val="true" data-val-required="Students required" id="students" name="students" type="text" value="{{ data.students|e }}" />
+        <span class="field-validation-valid" data-valmsg-for="students" data-valmsg-replace="true"></span>
+    </div>
+    -->
+    <div style="background-color:#CCC; padding:20px;">
+      <select id="wkSelect" multiple="multiple" name="students">
+        <option value="5e36f9f633bbca000dcff43d">Achille Castiglioni</option>
+        <option value="5e38a31ad272c0000cdcfad7">Alvar Aalto</option>
+        <option value="5e38a75cefaf58000bc54d42">Arne Jacobsen</option>
+        <option value="op4">Borge Mogensen</option>
+        <option value="op5">Castiglioni Bros.</option>
+        <option value="op6">Charles&Ray Eames</option>
+        <option value="op7">Claudio F. Bellini</option>
+        <option value="op8">Eames&Saarinen</option>
+        <option value="op9">Eero Aarnio</option>
+        <option value="op10">Eero Saarinen</option>
+      </select>
+    </div>
+    <div>
+        <input type="submit" id="savedata" class="btn btn-success" value="Save" />
+    </div>
+</form>
+    <script type="text/javascript">
+        $(document).ready(function() {
+			dialogSubmitter('course',oTableCourses);
+            $("#wkSelect").multiselect();
+        });
+    </script>

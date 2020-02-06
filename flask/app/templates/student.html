@@ -1,0 +1,29 @@
+
+<form action="" id="popupForm" method="post">
+{% if data %}
+<input data-val="true" data-val-regex="ID is not valid" data-val-regex-pattern="^([a-zA-Z0-9]+)$" id="id" name="id" type="hidden" value="{{ id|e }}" />
+{% endif %}
+	<div class="form-group">
+        <label>First Name</label>
+        <input class="form-control" data-val="true" data-val-required="First name required" id="firstName" name="firstName" type="text" value="{{ data.firstName|e }}" />
+        <span class="field-validation-valid" data-valmsg-for="firstName" data-valmsg-replace="true"></span>
+    </div>
+    <div class="form-group">
+        <label>Last Name</label>
+        <input class="form-control" data-val="true" data-val-required="Last name required" id="lastName" name="lastName" type="text" value="{{ data.lastName|e }}" />
+        <span class="field-validation-valid" data-valmsg-for="lastName" data-valmsg-replace="true"></span>
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input class="form-control" data-val="true" data-val-regex="E-mail is not valid" data-val-regex-pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" id="email" name="email" type="text" value="{{ data.email|e }}" />
+        <span class="field-validation-valid" data-valmsg-for="email" data-valmsg-replace="true"></span>
+    </div>
+    <div>
+        <input type="submit" id="savedata" class="btn btn-success" value="Save" />
+    </div>
+</form>
+    <script type="text/javascript">
+        $(document).ready(function() {
+			dialogSubmitter('student',oTableStudents);
+        });
+    </script>

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+    {% block styles %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"></link>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.4/css/intlTelInput.css">
+    {% endblock %}
+<title>CRUD</title>
+  </head>
+  <body>
+<h1>Students</h1>
+<div id="students" class="datatbl table_container" style="width: 900px;">
+  <a class="popup btn btn-primary" href="/create/student" style="margin-bottom:20px; margin-top:20px;">Add New Student</a>
+  <table id="serverside_table" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>First name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+		<th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+  </table>
+</div>
+
+<div id="courses" class="datatbl table_courses" style="width: 900px;">
+  <a class="popup btn btn-primary" href="/create/course" style="margin-bottom:20px; margin-top:20px;">Add New Course</a>
+  <table id="courses_table" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Student</th>
+		<th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+  </table>
+</div>
+<div class="datatbl table_grade" style="width: 900px;">
+  <a class="popup btn btn-primary" href="/create/grade" style="margin-bottom:20px; margin-top:20px;">Add New Grade</a>
+  <table id="grades_table" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Grade</th>
+        <th>Student</th>
+        <th>Course</th>
+		<th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+  </table>
+</div>
+    {% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.4/js/intlTelInput.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js"></script>
+	<script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-multiselect-widget/3.0.0/jquery.multiselect.min.js"></script>
+    <script type="text/javascript" src="/static/data_submit.js"></script>
+	<script>
+	var oTableStudents;
+	
+$(document).ready(function () {
+//$("table[id*='_table']")
+  oTableStudents = $('#serverside_table').DataTable({
+    bProcessing: true,
+//    bServerSide: true,
+    sPaginationType: "full_numbers",
+//    lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]],
+    bjQueryUI: true,
+    sAjaxSource: '/api/students',
+    aoColumns: [
+      {"mData": "_id.$oid"},
+      {"mData": "firstName"},
+      {"mData": "lastName"},
+      {"mData": "email"},
+	  {
+        "mData": "_id.$oid", "width": "50px", "render": function (data) {
+         return '<a class="popup" href="/edit/student/'+data+'">Edit</a>';
+        }
+      },
+      {
+        "mData": "_id.$oid", "width": "50px", "render": function (data) {
+            return '<a class="delete" href="/api/student/' + data + '">Delete</a>';
+        }
+      }
+    ]
+  });
+
+  oTableCourses = $('#courses_table').DataTable({
+    bProcessing: true,
+//    bServerSide: true,
+    sPaginationType: "full_numbers",
+//    lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]],
+    bjQueryUI: true,
+    sAjaxSource: '/api/courses?j',
+    aoColumns: [
+      {"mData": "_id.$oid"},
+      {"mData": "name"},
+      {"mData": "students"},
+	  {
+        "mData": "_id.$oid", "width": "50px", "render": function (data) {
+         return '<a class="popup" href="/edit/course/'+data+'">Edit</a>';
+        }
+      },
+      {
+        "mData": "_id.$oid", "width": "50px", "render": function (data) {
+            return '<a class="delete" href="/api/course/' + data + '">Delete</a>';
+        }
+      }
+    ]
+  });
+
+  oTableGrade = $('#grades_table').DataTable({
+    bProcessing: true,
+//    bServerSide: true,
+    sPaginationType: "full_numbers",
+//    lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]],
+    bjQueryUI: true,
+    sAjaxSource: '/api/grades?j',
+    aoColumns: [
+      {"mData": "grade"},
+      {"mData": "student"},
+	  {"mData": "course"},
+	  {
+        "mData": "_id.$oid", "width": "50px", "render": function (data) {
+         return '<a class="popup" href="/edit/grade/'+data+'">Edit</a>';
+        }
+      },
+      {
+        "mData": "_id.$oid", "width": "50px", "render": function (data) {
+            return '<a class="delete" href="/api/grade/' + data + '">Delete</a>';
+        }
+      }
+    ]
+  });
+
+
+
+     //$('#studentsave').click(  function (event) {
+     //$('.table_container')
+     $("table[id*='_table']").on('click', 'a.delete', function (e) {
+		event.preventDefault();
+        $.ajax({
+            url: $(this).attr('href'),
+            //url: '/api/student/'+id+'?'+urlEncodedDataPairs.join( '&' ).replace( /%20/g, '+' ),    //Your api url
+            type: 'DELETE',   //type is any HTTP method
+            //data: sendData,      //Data as js object
+            dataType: "json",
+            success: function () {
+                console.log('deleted');
+                //$dialog.dialog('close');
+                oTableStudents.ajax.reload();
+                oTableCourses.ajax.reload();
+                oTableGrade.ajax.reload();
+            }
+        });
+     });
+
+           $('.datatbl').on('click', 'a.popup', function (e) {
+                e.preventDefault();
+                OpenPopup($(this).attr('href'));
+            })
+            function OpenPopup(pageUrl) {
+                var $pageContent = $('<div/>');
+                $pageContent.load(pageUrl, function () {
+                    $('#popupForm', $pageContent).removeData('validator');
+                    $('#popupForm', $pageContent).removeData('unobtrusiveValidation');
+                    $.validator.unobtrusive.parse('form');
+ 
+                });
+ 
+                $dialog = $('<div class="popupWindow" style="overflow:auto"></div>')
+                          .html($pageContent)
+                          .dialog({
+                              draggable : false,
+                              autoOpen : false,
+                              resizable : false,
+                              model : true,
+                              title:'Popup Dialog',
+                              height : 550,
+                              width : 600,
+                              close: function () {
+                                  $dialog.dialog('destroy').remove();
+                              }
+                          })
+ 
+                $('.popupWindow').on('submit', '#popupForm', function (e) {
+                    var url = $('#popupForm')[0].action;
+                    $.ajax({
+                        type : "POST",
+                        url : url,
+                        data: $('#popupForm').serialize(),
+                        success: function (data) {
+                            if (data.status) {
+                                $dialog.dialog('close');
+                                oTable.ajax.reload();
+                            }
+                        }
+                    })
+                    e.preventDefault();
+                })
+                $dialog.dialog('open');
+            }
+
+
+
+});
+	</script>
+    {% endblock %}
+</body>
+</html>

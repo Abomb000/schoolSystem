@@ -1,0 +1,29 @@
+
+<form action="" id="popupForm" method="post">
+{% if data %}
+<input data-val="true" data-val-regex="ID is not valid" data-val-regex-pattern="^([a-zA-Z0-9]+)$" id="id" name="id" type="hidden" value="{{ id|e }}" />
+{% endif %}
+	<div class="form-group">
+        <label>Grade</label>
+        <input class="form-control" data-val="true" data-val-required="Grade required" id="name" name="grade" type="grade" value="{{ data.grade|e }}" />
+        <span class="field-validation-valid" data-valmsg-for="name" data-valmsg-replace="true"></span>
+    </div>
+    <div class="form-group">
+        <label>Student</label>
+        <input class="form-control" data-val="true" data-val-required="Student required" id="student" name="student" type="text" value="{{ data.student|e }}" />
+        <span class="field-validation-valid" data-valmsg-for="student" data-valmsg-replace="true"></span>
+    </div>
+    <div class="form-group">
+        <label>Course</label>
+        <input class="form-control" data-val="true" data-val-required="course required" id="course" name="course" type="text" value="{{ data.course|e }}" />
+        <span class="field-validation-valid" data-valmsg-for="course" data-valmsg-replace="true"></span>
+    </div>
+    <div>
+        <input type="submit" id="savedata" class="btn btn-success" value="Save" />
+    </div>
+</form>
+    <script type="text/javascript">
+        $(document).ready(function() {
+			dialogSubmitter('grade',oTableGrade);
+        });
+    </script>
