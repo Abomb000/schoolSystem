@@ -3,9 +3,10 @@
   <head>
       <meta charset="utf-8">
     {% block styles %}
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"></link>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.4/css/intlTelInput.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.4/css/intlTelInput.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/multi-select/0.9.12/css/multi-select.min.css" />
     {% endblock %}
 <title>CRUD</title>
   </head>
@@ -34,7 +35,7 @@
       <tr>
         <th>Id</th>
         <th>Name</th>
-        <th>Student</th>
+        <th>Students In course</th>
 		<th>Edit</th>
         <th>Delete</th>
       </tr>
@@ -63,7 +64,9 @@
 	<script type="text/javascript" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-multiselect-widget/3.0.0/jquery.multiselect.min.js"></script>
+	<!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-multiselect-widget/3.0.0/jquery.multiselect.min.js"></script>-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.quicksearch/2.4.0/jquery.quicksearch.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/multi-select/0.9.12/js/jquery.multi-select.min.js"></script>
     <script type="text/javascript" src="/static/data_submit.js"></script>
 	<script>
 	var oTableStudents;
@@ -105,7 +108,9 @@ $(document).ready(function () {
     aoColumns: [
       {"mData": "_id.$oid"},
       {"mData": "name"},
-      {"mData": "students"},
+      {"mData": "students", "render": function (data) {
+            return data.length;
+        }},
 	  {
         "mData": "_id.$oid", "width": "50px", "render": function (data) {
          return '<a class="popup" href="/edit/course/'+data+'">Edit</a>';

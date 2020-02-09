@@ -2,7 +2,6 @@ from flask import Flask
 import redis
 from mongoengine import connect
 
-import os
 
 app = Flask(__name__, static_url_path='')
 

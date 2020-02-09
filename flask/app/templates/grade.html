@@ -10,12 +10,33 @@
     </div>
     <div class="form-group">
         <label>Student</label>
-        <input class="form-control" data-val="true" data-val-required="Student required" id="student" name="student" type="text" value="{{ data.student|e }}" />
+        <select class="form-control" data-val="true" data-val-required="Student required" id="student" name="student" type="text" >
+            {% if data.users %}
+                {% for student in data.users %}
+                      {% if student._id['$oid'] in data.student %}
+                        <option value="{{ student._id['$oid'] }}" selected>{{ student.firstName }}</option>
+                      {% else %}
+                        <option value="{{ student._id['$oid'] }}">{{ student.firstName }}</option>
+                      {% endif %}
+                {% endfor %}
+            {% endif %}
+        </select>
         <span class="field-validation-valid" data-valmsg-for="student" data-valmsg-replace="true"></span>
     </div>
     <div class="form-group">
         <label>Course</label>
-        <input class="form-control" data-val="true" data-val-required="course required" id="course" name="course" type="text" value="{{ data.course|e }}" />
+        <!--<input class="form-control" data-val="true" data-val-required="course required" id="course" name="course" type="text" value="{{ data.course|e }}" />-->
+                <select class="form-control" data-val="true" data-val-required="course required" id="course" name="course" type="text" >
+            {% if data.courses %}
+                {% for course in data.courses %}
+                      {% if course._id['$oid'] in data.courses %}
+                        <option value="{{ course._id['$oid'] }}" selected>{{ course.name }}</option>
+                      {% else %}
+                        <option value="{{ course._id['$oid'] }}">{{ course.name }}</option>
+                      {% endif %}
+                {% endfor %}
+            {% endif %}
+        </select>
         <span class="field-validation-valid" data-valmsg-for="course" data-valmsg-replace="true"></span>
     </div>
     <div>

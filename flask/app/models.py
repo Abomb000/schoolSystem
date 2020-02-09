@@ -16,3 +16,4 @@ class Grade(Document):
     grade = IntField()
     student = StringField(unique_with='course')
     course = StringField(unique_with='student')
+
